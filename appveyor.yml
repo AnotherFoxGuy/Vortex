@@ -1,12 +1,19 @@
-environment:
-  nodejs_version: "8"
-
-cache:
- - "%LOCALAPPDATA%\\Yarn"
-
+version:                         0.14.{build}
+cache:                           '%LOCALAPPDATA%\Yarn'
+pull_requests:
+  do_not_increment_build_number: true
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - yarn install
-
-build:
-  - yarn dist
+  - ps:                          Install-Product node 8
+  - cmd:                         yarn
+build_script:
+  - cmd:                         node configure.js
+  - cmd:                         ninja build
+  - cmd:                         tree /A
+test:                            off
+#test_script:
+#  - cmd:                        yarn test
+artifacts:
+  - path:                        dist\*.exe
+    name:                        Vortex-Setup-V%APPVEYOR_BUILD_VERSION%
+  - path:                        dist\win-ia32-unpacked
+    name:                        Vortex-Unpacked-V%APPVEYOR_BUILD_VERSION%

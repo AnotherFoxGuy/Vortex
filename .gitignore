@@ -40,3 +40,5 @@ icons/Nucleo_Glyph/
 icons/Nucleo_Outline/
 icons/nucleo-standard-license.txt
 BuildState*.json
+
+build\.ninja
